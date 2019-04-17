@@ -1,7 +1,10 @@
 package vista;
 
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
@@ -9,6 +12,7 @@ import control.DepartamentoC;
 import control.EmpleadoC;
 import modelo.Departamento;
 import modelo.Fichero;
+import modelo.Proyecto;
 
 public class Entrada {
 	
@@ -60,10 +64,27 @@ public class Entrada {
 		x++;
 		 }
 			
-			
 			return carga;
 		
 		}
+	 
+	 public static Proyecto insertarProj() throws ParseException {
+		 Proyecto proyecto = null;
+		 System.out.println("Para insertar un proyecto estipule: 1. nombre");
+		 String nombre = scan.next();
+		 System.out.println("ahora 2. fecha de inicio, 3. fecha prevista de finalización");
+		 System.out.println("Para las fechas se escribira el formato yyyy-MM-dd");
+		 String fechaInicio = scan.next();
+		 String fechaFin = scan.next();
+		 System.out.println("Por último el nombre del cliente que encargó el proyecto");
+		 String cliente = scan.next();
+		 SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		 Date fechaI = format.parse(fechaInicio);
+		 Date fechaF = format.parse(fechaFin);
+		 System.out.println(fechaI+""+fechaF);
+		 proyecto = new Proyecto(nombre, fechaI, fechaF, cliente);
+		 return proyecto;
+	}
 
 	 public static List<Departamento>  updateDeparFichN () throws SQLException {
 			// CREAR LISTA CON UPDATES NUEVOS Y VIEJOS DEPARTAMENTOS 
