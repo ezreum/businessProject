@@ -104,4 +104,29 @@ public class Entrada {
 		 	String borrar = scan.next();
 		 	DepartamentoC.borrarDepartamento(borrar);
 	 }
+	 	
+	 	public static int[] AddTec() {
+			int[] tecproj = new int[2];
+	 		System.out.println("Introduce el número del proyecto");
+			tecproj[0] = scan.nextInt();
+			System.out.println("Introduce el número del técnico");
+			tecproj[1] = scan.nextInt();
+			return tecproj;
+			
+		}
+	 	
+	 	public static Date[] AddTec2() throws ParseException {
+	 		Date[] fechas = new Date[2];
+	 		System.out.println("introduce la fecha en la que el tecnico empieza a formar parte del proyecto \n el formato será yyyy-MM-dd");
+			String fechaInicio = scan.next();
+			System.out.println("introduce la fecha en la que el tecnico deja de formar parte del proyecto \n el formato será yyyy-MM-dd");
+			String fechaFin = scan.next();
+			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+			Date fechaI = Proyecto.convertUtil(format.parse(fechaInicio));
+			fechas[0]= fechaI;
+			Date fechaF = Proyecto.convertUtil(format.parse(fechaFin));
+			fechas[1]= fechaF;
+			System.out.println(fechaI+""+fechaF);
+			return fechas;	
+		}
 }

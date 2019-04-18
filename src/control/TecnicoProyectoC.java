@@ -1,5 +1,6 @@
 package control;
 
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
@@ -19,6 +20,33 @@ public class TecnicoProyectoC {
 		if (enlace.insertar(sql) == true) {
 			ok=true;}
 			return ok;
+	}
+	
+	public static void iniciarTecProj() throws SQLException, ParseException {
+		EnlaceJDBC enlace= new EnlaceJDBC();
+		ResultSet rs = null;
+		ResultSet tec = null;
+		int[] datos = Entrada.AddTec();
+		String consultaSQL = "SELECT * FROM proyecto where cod_proyecto = "+datos[0]+"";
+		String consulta ="SELECT * FROM tecnico where num_empleado = "+datos[1]+"";
+		rs = enlace.seleccionRegistros(consultaSQL);
+		tec = enlace.seleccionRegistros(consulta);
+		Proyecto numero = null;
+		int idproj = 0, idtec = 0;
+		Date inicio = null;
+		Date ffin = null;
+		String sql = null;
+		while ((rs.next()) && (tec.next())) {
+			idtec = tec.getInt("num_empleado");
+			idproj = rs.getInt("cod_proyecto");
+			java.util.Date[] fechas = Entrada.AddTec2();
+			sql = "INSERT INTO tecnico_proyecto() values("+idtec+","+idproj+",'"+fechas[0]+"','"+fechas[1]+"')";
+		}
+		 
+		if (enlace.insertar(sql) == true) {
+		System.out.println("inserción correcta");	
+		}
+		else System.out.println("Fallo al insertar");
 	}
 	
 	public static Tecnico getTech(int idTecnico) throws SQLException {
