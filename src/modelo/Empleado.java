@@ -6,7 +6,6 @@ public class Empleado {
 	private String direccion;
 	private String tipo;
 	private Departamento cod_depar;
-
 	private int cod_depar1;
 	
 	public String getNombre() {

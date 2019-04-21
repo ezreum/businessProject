@@ -2,6 +2,7 @@ package control;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.Scanner;
 
 import modelo.Departamento;
@@ -13,7 +14,7 @@ import vista.Salida;
 public class MainEmpresa {
 	public static Scanner scan = new Scanner (System.in);
 	
-public static void main(String[] args) throws SQLException, IOException {
+public static void main(String[] args) throws SQLException, IOException, ParseException {
 		
 		int opcion;
 		System.out.println("Elija un numero dependiendo de lo que necesite: "
@@ -23,7 +24,8 @@ public static void main(String[] args) throws SQLException, IOException {
 				+ "\n 4.-Insertar un empleado a través de consola."
 				+ "\n 5.-Actualizar un departamento a través de consola."
 				+ "\n 6.-Actualizar un departamento a través de un fichero."
-				+ "\n 7.-Borrar un departamento. ");
+				+ "\n 7.-Borrar un departamento."
+				+ "\n 8.-Insertar un proyecto.");
 		opcion=scan.nextInt();
 		switch (opcion) {
 		
@@ -47,7 +49,10 @@ public static void main(String[] args) throws SQLException, IOException {
 			  DepartamentoC.borrarDepartamento(Entrada.deleteDepar());
 			   }
 		  break;
-		
+		  case 8: {
+			  ProyectoC.insertarProyecto();
+		  }
+		  break;
 		  default: {System.out.println("Error");}
 			 
 		}
@@ -57,4 +62,3 @@ public static void main(String[] args) throws SQLException, IOException {
 
 	}
 	
-
