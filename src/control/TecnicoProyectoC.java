@@ -4,10 +4,13 @@ import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.List;
 
 import dao.EnlaceJDBC;
 import modelo.Proyecto;
 import modelo.Tecnico;
+import modelo.TecnicoProyecto;
 import vista.Entrada;
 
 public class TecnicoProyectoC {
@@ -72,5 +75,19 @@ public class TecnicoProyectoC {
 		}
 		return proyecto;
 	}
+	
+	public static List<TecnicoProyecto> allTec() throws SQLException {
+		List<TecnicoProyecto> tecnicos = new ArrayList<>();
+		EnlaceJDBC enlace = new EnlaceJDBC();
+		ResultSet rs = null;
+		String sql = "SELECT * FROM tecnico_proyecto";
+		rs = enlace.seleccionRegistros(sql);
+		while (rs.next()) {
+			tecnicos.add(new TecnicoProyecto(rs.getInt("num_empleado"), rs.getInt("cod_proyecto"), rs.getDate("fecha_asignacion"), rs.getDate("fecha_cese")));
+		}
+		return tecnicos;
+		
+	}
+	
 	
 }
