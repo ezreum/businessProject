@@ -19,7 +19,11 @@ import javax.swing.JTextField;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.log.SysoCounter;
 
+import control.DepartamentoC;
+import control.EmpleadoC;
 import control.MainEmpresa;
+import control.TecnicoProyectoC;
+import modelo.Fichero;
 
 public class Keypad implements ActionListener{
 	JFrame principal;
@@ -58,31 +62,31 @@ public class Keypad implements ActionListener{
 		centro = new JPanel();
 		sur = new JPanel();
 		norte.setLayout(new BorderLayout());
-		nortero = new JTextField("Escriba aquí sus dudas");
+		nortero = new JTextField("Elija una opción");
 		norte.add(nortero);
 		norte.setPreferredSize(new Dimension(150, 50));
-		a = new JButton("primero");
+		a = new JButton("Cargar lista Departamentos");
 		a.addActionListener(this);
 		a.setActionCommand("1");
-		b = new JButton("segundo");
+		b = new JButton("Ver el id de un departamento");
 		b.addActionListener(this);
 		b.setActionCommand("2");
-		c = new JButton("tercero");
+		c = new JButton("Cargar lista empleados");
 		c.addActionListener(this);
 		c.setActionCommand("3");
-		d = new JButton("cuarto");
+		d = new JButton("Reestructurar departamento(s)");
 		d.addActionListener(this);
 		d.setActionCommand("4");
-		e = new JButton("quinto");
+		e = new JButton("Eliminar departamento");
 		e.addActionListener(this);
 		e.setActionCommand("5");
-		f = new JButton("sexto");
+		f = new JButton("Insertar projecto");
 		f.addActionListener(this);
 		f.setActionCommand("6");
-		g = new JButton("septimo");
+		g = new JButton("incluir tecnicos en proyecto");
 		g.addActionListener(this);
 		g.setActionCommand("7");
-		h = new JButton("octavo");
+		h = new JButton("Exportar en un pdf técnicos");
 		h.addActionListener(this);
 		h.setActionCommand("8");
 		centro.setLayout(new GridLayout(4,3));
@@ -107,8 +111,48 @@ public class Keypad implements ActionListener{
 		if (e.getActionCommand() != null);{
 		int g = Integer.parseInt(e.getActionCommand());
 		try {
-			MainEmpresa.suichi(g);
-		} catch (FileNotFoundException | SQLException | ParseException | DocumentException e1) {
+			switch (g) {
+			case 1: {
+				Entrada.insertar();
+				DepartamentoC.iniciarDepartamentos(Fichero.LecturaListaInDe());
+			}
+			break;
+			case 2: {
+				//ver el id de un departamento
+				VentanaSecundaria secundaria = new VentanaSecundaria(g);
+				
+			}
+			break;
+			case 3: {
+			/*	Entrada.iniciarEmpleado();*/
+				
+				EmpleadoC.cargarEmpleados(Fichero.LecturaLista());
+			}
+			break;
+			case 4: {
+				DepartamentoC.updateFichero(Entrada.updateDeparFichC(), Entrada.updateDeparFichN());
+			}
+			break;
+			case 5: {
+				//borrar departamento
+				VentanaSecundaria secundaria = new VentanaSecundaria(g);
+			}
+			break;
+			case 6: {
+				VentanaSecundaria secundaria = new VentanaSecundaria(g);
+			}
+			break;
+			case 7: {
+				VentanaSecundaria secundaria = new VentanaSecundaria(g);
+			}
+			break;
+			case 8: {
+				Fichero.pdfWrite(TecnicoProyectoC.allTec());	
+			}
+			break;
+			}
+			
+		} catch (FileNotFoundException | SQLException | DocumentException | ParseException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
@@ -117,7 +161,10 @@ public class Keypad implements ActionListener{
 	}
 	
 	
-	
+	public void close() {
+		principal.setVisible(false);
+		principal.dispose();
+	}
 	
 	
 	
