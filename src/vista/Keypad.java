@@ -142,7 +142,7 @@ public class Keypad implements ActionListener{
 				VentanaSecundaria secundaria = new VentanaSecundaria(g);
 			}
 			break;
-			case 7: {
+			case 7: {//esta está sin hacer ni la 8 tampoco
 				VentanaSecundaria secundaria = new VentanaSecundaria(g);
 			}
 			break;
